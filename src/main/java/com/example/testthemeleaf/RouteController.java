@@ -24,11 +24,6 @@ public class RouteController {
         return "page/home";
     }
 
-    @GetMapping("/navigation")
-    public String navigation() {
-        return "page/navigation";
-    }
-
     @GetMapping("/uploadPage")
     public String uploadPage() {
         return "page/upload";
