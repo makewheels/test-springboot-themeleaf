@@ -5,10 +5,39 @@
     <title>user.html</title>
 </head>
 <body>
+
 <div>
     <a th:href="home">首页</a>
     <a th:href="user">用户列表</a>
 </div>
+
 <h1> Action is everything </h1>
+
+<table border="1px" cellspacing="0px" style="border-collapse:collapse">
+    <thead>
+    <tr>
+        <td><b>id</b></td>
+        <td><b>logo</b></td>
+        <td><b>name</b></td>
+        <td><b>createTime</b></td>
+        <td><b>Operation</b></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user:${userList}">
+        <td th:text="${user.id}"></td>
+        <td>
+            <img th:src="${user.logo}" height="25" width="25"/>
+        </td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${#dates.format(user.createTime,'yyyy-MM-dd hh:mm:ss')}"></td>
+        <td>
+            <a th:text="DELETE" th:href="@{/page/deleteUser(id=${user.id},name=${user.name})}"></a>
+            <a th:text="UPDATE" th:href="@{/page/updateUser(id=${user.id},name=${user.name})}"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>
