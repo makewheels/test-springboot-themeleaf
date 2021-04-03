@@ -2,10 +2,11 @@ package com.example.testthemeleaf;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -23,6 +24,11 @@ public class RouteController {
     @GetMapping("/navigation")
     public String navigation() {
         return "page/navigation";
+    }
+
+    @GetMapping("/uploadPage")
+    public String uploadPage() {
+        return "page/upload";
     }
 
     @GetMapping("/user")
@@ -50,6 +56,23 @@ public class RouteController {
     public String updateUser(@RequestParam Integer id, @RequestParam String name) {
         System.out.println("UPDATE USER: id = " + id);
         System.out.println("UPDATE USER: name = " + name);
+        return "redirect:user";
+    }
+
+    @PostMapping("/uploadFile")
+    @ResponseBody
+    public String uploadFile(
+            @RequestParam String fname, @RequestParam String lname,
+            @RequestParam("logo") MultipartFile logoFile) {
+        System.out.println("uploadFile: fname = " + fname);
+        System.out.println("uploadFile: lname = " + lname);
+        System.out.println(logoFile.getOriginalFilename());
+        File target = new File("C:\\Users\\thedoflin\\Downloads\\1.hello");
+        try {
+            logoFile.transferTo(target);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "redirect:user";
     }
 }

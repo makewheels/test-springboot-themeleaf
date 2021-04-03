@@ -6,12 +6,11 @@
 </head>
 <body>
 
-<div class="navigation"></div>
-
-<script type="text/javascript">
-    $(".navigation").load('http://localhost:8080/testthemeleaf/page/navigation.html');
-    $.nicenav(300, '216px');
-</script>
+<div>
+    <a th:href="home">首页</a>
+    <a th:href="user">用户列表</a>
+    <a th:href="uploadPage">上传</a>
+</div>
 
 <h1> Thyleaf in action </h1>
 </body>

@@ -2,17 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>home.html</title>
+    <title>upload.html</title>
 </head>
 <body>
 
-<div class="navigation"></div>
+<div>
+    <a th:href="home">首页</a>
+    <a th:href="user">用户列表</a>
+    <a th:href="uploadPage">上传</a>
+</div>
 
-<script type="text/javascript">
-    $(".navigation").load('http://localhost:8080/testthemeleaf/page/navigation.html');
-    $.nicenav(300, '216px');
-</script>
+<form th:action="uploadFile" method="post" enctype="multipart/form-data">
+    <p>First name: <input type="text" name="fname" value="gwega"/></p>
+    <p>Last name: <input type="text" name="lname" value="rgnmife98f"/></p>
+    <p>Last name: <input type="file" name="logo"/></p>
+    <input type="submit" value="上传按钮钮啦啦啦"/>
+</form>
 
-<h1> Thyleaf in action </h1>
 </body>
 </html>
