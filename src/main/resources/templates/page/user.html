@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>action is everything</title>
 </head>
 <body>
-<div data-th-fragment="header">
-    <h1> Thyleaf in action </h1>
-    <a href="/">首页</a>
+<div>
+    <h1> User Page </h1>
+    <a th:href="home">首页</a>
 </div>
 </body>
 </html>

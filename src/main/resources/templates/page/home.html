@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>home.html</title>
 </head>
 <body>
-<div data-th-fragment="header">
+<div>
     <h1> Thyleaf in action </h1>
-    <a href="${pageContext.request.getContextPath()}/affeaf">首页</a>
+    <a th:href="user">用户user</a>
 </div>
 </body>
 </html>
