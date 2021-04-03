@@ -20,6 +20,11 @@ public class RouteController {
         return "page/home";
     }
 
+    @GetMapping("/navigation")
+    public String navigation() {
+        return "page/navigation";
+    }
+
     @GetMapping("/user")
     public String user(ModelMap modelMap) {
         String logo = "https://postimgs.org/img/bookshelf.jpg";
