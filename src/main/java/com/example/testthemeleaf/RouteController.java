@@ -1,14 +1,17 @@
 package com.example.testthemeleaf;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -60,13 +63,14 @@ public class RouteController {
     }
 
     @PostMapping("/uploadFile")
-    @ResponseBody
     public String uploadFile(
             @RequestParam String fname, @RequestParam String lname,
             @RequestParam("logo") MultipartFile logoFile) {
         System.out.println("uploadFile: fname = " + fname);
         System.out.println("uploadFile: lname = " + lname);
-        System.out.println(logoFile.getOriginalFilename());
+        String originalFilename = logoFile.getOriginalFilename();
+        System.out.println(originalFilename);
+        System.out.println(FilenameUtils.getExtension(originalFilename));
         File target = new File("C:\\Users\\thedoflin\\Downloads\\1.hello");
         try {
             logoFile.transferTo(target);
