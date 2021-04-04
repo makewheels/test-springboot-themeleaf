@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,8 +22,9 @@ import java.util.List;
 public class RouteController {
 
     @GetMapping("/home")
-    public String home() {
-        return "page/home";
+    public String home(HttpServletRequest request) {
+        request.setAttribute("hello", "fewawfefeawwfe");
+        return "/page/home";
     }
 
     @GetMapping("/uploadPage")
@@ -40,38 +43,41 @@ public class RouteController {
         userList.add(u2);
         userList.add(u3);
         modelMap.put("userList", userList);
-        return "page/user";
+        return "/page/user";
     }
 
     @GetMapping("/deleteUser")
     public String deleteUser(@RequestParam Integer id, @RequestParam String name) {
         System.out.println("DELETE USER: id = " + id);
         System.out.println("DELETE USER: name = " + name);
-        return "redirect:user";
+        return "forward:/page/user";
     }
 
     @GetMapping("/updateUser")
     public String updateUser(@RequestParam Integer id, @RequestParam String name) {
         System.out.println("UPDATE USER: id = " + id);
         System.out.println("UPDATE USER: name = " + name);
-        return "redirect:user";
+        return "redirect:/page/user";
     }
 
     @PostMapping("/uploadFile")
     public String uploadFile(
             @RequestParam String fname, @RequestParam String lname,
-            @RequestParam("logo") MultipartFile logoFile) {
+            @RequestParam("logo") MultipartFile logoFile, ModelMap modelMap) {
         System.out.println("uploadFile: fname = " + fname);
         System.out.println("uploadFile: lname = " + lname);
         String originalFilename = logoFile.getOriginalFilename();
         System.out.println(originalFilename);
         System.out.println(FilenameUtils.getExtension(originalFilename));
         File target = new File("C:\\Users\\thedoflin\\Downloads\\1.hello");
-        try {
-            logoFile.transferTo(target);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!logoFile.isEmpty()) {
+            try {
+                logoFile.transferTo(target);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return "redirect:user";
+        modelMap.put("errorMessage", "errorMessagekfweaawef23f32");
+        return "/page/upload";
     }
 }
