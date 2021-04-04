@@ -63,7 +63,9 @@ public class RouteController {
     @PostMapping("/uploadFile")
     public String uploadFile(
             @RequestParam String fname, @RequestParam String lname,
-            @RequestParam("logo") MultipartFile logoFile, ModelMap modelMap) {
+            @RequestParam("logo") MultipartFile logoFile, ModelMap modelMap
+
+            , HttpSession session) {
         System.out.println("uploadFile: fname = " + fname);
         System.out.println("uploadFile: lname = " + lname);
         String originalFilename = logoFile.getOriginalFilename();
@@ -77,7 +79,10 @@ public class RouteController {
                 e.printStackTrace();
             }
         }
+
         modelMap.put("errorMessage", "errorMessagekfweaawef23f32");
+        session.setAttribute("errorMessage", "errorMessaSSSession");
+//        return "redirect:/page/uploadPage";
         return "/page/upload";
     }
 }
